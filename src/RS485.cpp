@@ -34,6 +34,9 @@ void RS485Class::begin(unsigned long baudrate)
 
 void RS485Class::begin(unsigned long baudrate, uint16_t config)
 {
+  _baudrate = baudrate;
+  _config = config;
+
   pinMode(_rePin, OUTPUT);
   pinMode(_dePin, OUTPUT);
 
@@ -118,6 +121,13 @@ void RS485Class::noReceive()
 {
   delay(1);
   digitalWrite(_rePin, HIGH);
+}
+
+void RS485Class::sendBreak(unsigned int duration)
+{
+  _serial->end();
+  delay(duration);
+  _serial->begin(_baudrate, _config);
 }
 
 void RS485Class::setPins(int rePin, int dePin)

@@ -45,6 +45,8 @@ class RS485Class : public HardwareSerial {
     void receive();
     void noReceive();
 
+    void sendBreak(unsigned int duration);
+
     void setPins(int rePin, int dePin);
 
   private:
@@ -53,6 +55,8 @@ class RS485Class : public HardwareSerial {
     int _dePin;
 
     bool _transmisionBegun;
+    unsigned long _baudrate;
+    uint16_t _config;
 };
 
 extern RS485Class RS485;

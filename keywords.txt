@@ -23,6 +23,7 @@ beginTransmission	KEYWORD2
 endTransmission	KEYWORD2
 receive	KEYWORD2
 noReceive	KEYWORD2
+sendBreak	KEYWORD2
 setPins	KEYWORD2
 
 #######################################
