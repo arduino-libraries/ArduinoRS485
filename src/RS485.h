@@ -22,12 +22,13 @@
 
 #include <Arduino.h>
 
+#define RS485_DEFAULT_TX_PIN PIN_SERIAL1_TX
 #define RS845_DEFAULT_RE_PIN A5
 #define RS845_DEFAULT_DE_PIN A6
 
 class RS485Class : public HardwareSerial {
   public:
-    RS485Class(HardwareSerial& hwSerial, int rePin, int dePin);
+    RS485Class(HardwareSerial& hwSerial, int txPin, int rePin, int dePin);
 
     virtual void begin(unsigned long baudrate);
     virtual void begin(unsigned long baudrate, uint16_t config);
@@ -47,10 +48,11 @@ class RS485Class : public HardwareSerial {
 
     void sendBreak(unsigned int duration);
 
-    void setPins(int rePin, int dePin);
+    void setPins(int txPin, int rePin, int dePin);
 
   private:
     HardwareSerial* _serial;
+    int _txPin;
     int _rePin;
     int _dePin;
 

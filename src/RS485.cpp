@@ -19,8 +19,9 @@
 
 #include "RS485.h"
 
-RS485Class::RS485Class(HardwareSerial& hwSerial, int rePin, int dePin) :
+RS485Class::RS485Class(HardwareSerial& hwSerial, int txPin, int rePin, int dePin) :
   _serial(&hwSerial),
+  _txPin(txPin),
   _rePin(rePin),
   _dePin(dePin),
   _transmisionBegun(false)
@@ -82,6 +83,7 @@ void RS485Class::flush()
 size_t RS485Class::write(uint8_t b)
 {
   if (!_transmisionBegun) {
+    setWriteError();
     return 0;
   }
 
@@ -125,15 +127,19 @@ void RS485Class::noReceive()
 
 void RS485Class::sendBreak(unsigned int duration)
 {
+  _serial->flush();
   _serial->end();
+  pinMode(_txPin, OUTPUT);
+  digitalWrite(_txPin, LOW);
   delay(duration);
   _serial->begin(_baudrate, _config);
 }
 
-void RS485Class::setPins(int rePin, int dePin)
+void RS485Class::setPins(int txPin, int rePin, int dePin)
 {
+  _txPin = txPin;
   _rePin = rePin;
   _dePin = dePin;
 }
 
-RS485Class RS485(SERIAL_PORT_HARDWARE, RS845_DEFAULT_RE_PIN, RS845_DEFAULT_DE_PIN);
+RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS845_DEFAULT_RE_PIN, RS845_DEFAULT_DE_PIN);
