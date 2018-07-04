@@ -135,6 +135,16 @@ void RS485Class::sendBreak(unsigned int duration)
   _serial->begin(_baudrate, _config);
 }
 
+void RS485Class::sendBreakMicroseconds(unsigned int duration)
+{
+  _serial->flush();
+  _serial->end();
+  pinMode(_txPin, OUTPUT);
+  digitalWrite(_txPin, LOW);
+  delayMicroseconds(duration);
+  _serial->begin(_baudrate, _config);
+}
+
 void RS485Class::setPins(int txPin, int rePin, int dePin)
 {
   _txPin = txPin;

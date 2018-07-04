@@ -24,6 +24,7 @@ endTransmission	KEYWORD2
 receive	KEYWORD2
 noReceive	KEYWORD2
 sendBreak	KEYWORD2
+sendBreakMicroseconds	KEYWORD2
 setPins	KEYWORD2
 
 #######################################

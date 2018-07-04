@@ -47,6 +47,7 @@ class RS485Class : public HardwareSerial {
     void noReceive();
 
     void sendBreak(unsigned int duration);
+    void sendBreakMicroseconds(unsigned int duration);
 
     void setPins(int txPin, int rePin, int dePin);
 
