@@ -98,7 +98,7 @@ RS485Class::operator bool()
 void RS485Class::beginTransmission()
 {
   digitalWrite(_dePin, HIGH);
-  delay(1);
+  delayMicroseconds(50);
 
   _transmisionBegun = true;
 }
@@ -106,9 +106,8 @@ void RS485Class::beginTransmission()
 void RS485Class::endTransmission()
 {
   _serial->flush();
-  delay(1);
+  delayMicroseconds(50);
   digitalWrite(_dePin, LOW);
-  
 
   _transmisionBegun = false;
 }
@@ -116,12 +115,10 @@ void RS485Class::endTransmission()
 void RS485Class::receive()
 {
   digitalWrite(_rePin, LOW);
-  delay(1);
 }
 
 void RS485Class::noReceive()
 {
-  delay(1);
   digitalWrite(_rePin, HIGH);
 }
 
