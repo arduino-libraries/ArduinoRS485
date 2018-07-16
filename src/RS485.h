@@ -31,7 +31,7 @@
 #define RS845_DEFAULT_DE_PIN A6
 #define RS845_DEFAULT_RE_PIN A5
 
-class RS485Class : public HardwareSerial {
+class RS485Class : public Stream {
   public:
     RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
 
