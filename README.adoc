@@ -1,6 +1,6 @@
 = RS485 Library for Arduino =
 
-Enables sending and receiving data using the RS485 standard with RS485 shields, like the MKR 485 shield.
+Enables sending and receiving data using the RS485 standard with RS485 shields, like the MKR 485 Shield.
 
 This library supports the Maxim Integrated MAX3157 and equivalent chipsets.
 
