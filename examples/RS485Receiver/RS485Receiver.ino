@@ -17,7 +17,7 @@
   by Sandeep Mistry
 */
 
-#include <RS485.h>
+#include <ArduinoRS485.h>
 
 void setup() {
   Serial.begin(9600);

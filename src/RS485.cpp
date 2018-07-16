@@ -1,5 +1,5 @@
 /*
-  This file is part of the RS485 library.
+  This file is part of the ArduinoRS485 library.
   Copyright (c) 2018 Arduino SA. All rights reserved.
 
   This library is free software; you can redistribute it and/or

@@ -5,7 +5,7 @@ Enables sending and receiving data using the RS485 standard with RS485 shields, 
 This library supports the Maxim Integrated MAX3157 and equivalent chipsets.
 
 For more information about this library please visit us at
-http://www.arduino.cc/en/Reference/RS485
+http://www.arduino.cc/en/Reference/ArduinoRS485
 
 == License ==
 
