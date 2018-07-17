@@ -28,8 +28,13 @@
 #define RS485_DEFAULT_TX_PIN 1 
 #endif
 
+#ifdef __AVR__
+#define RS845_DEFAULT_DE_PIN 2
+#define RS845_DEFAULT_RE_PIN -1
+#else
 #define RS845_DEFAULT_DE_PIN A6
 #define RS845_DEFAULT_RE_PIN A5
+#endif
 
 class RS485Class : public Stream {
   public:
