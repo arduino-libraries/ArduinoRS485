@@ -22,6 +22,10 @@
 
 #include <Arduino.h>
 
+#if defined(CONTROLLINO_MAXI) || defined(CONTROLLINO_MEGA)
+#include <Controllino.h>
+#endif
+
 #ifdef PIN_SERIAL1_TX
 #define RS485_DEFAULT_TX_PIN PIN_SERIAL1_TX
 #else
