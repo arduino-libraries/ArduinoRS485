@@ -26,6 +26,16 @@
 #include <Controllino.h>
 #endif
 
+#if defined(__AVR_ATmega2560__)
+    #define RS485_DE_PIN    21
+    #define RS485_nRE_PIN   20
+    #define RS485_TX_PIN    14
+#elif defined(__AVR_ATmega328P__)       
+    #define RS485_DE_PIN    3
+    #define RS485_nRE_PIN   2
+    #define RS485_TX_PIN    1
+#endif
+
 #ifdef PIN_SERIAL1_TX
 #define RS485_DEFAULT_TX_PIN PIN_SERIAL1_TX
 #else
