@@ -29,12 +29,16 @@
 #endif
 
 #ifdef __AVR__
-#define RS485_DEFAULT_DE_PIN 2
-#define RS485_DEFAULT_RE_PIN -1
+#define RS845_DEFAULT_DE_PIN 2
+#define RS845_DEFAULT_RE_PIN -1
 #else
-#define RS485_DEFAULT_DE_PIN A6
-#define RS485_DEFAULT_RE_PIN A5
+#define RS845_DEFAULT_DE_PIN A6
+#define RS845_DEFAULT_RE_PIN A5
 #endif
+
+
+#define RS485_DEFAULT_PRE_DELAY 50
+#define RS485_DEFAULT_POST_DELAY 50
 
 class RS485Class : public Stream {
   public:
@@ -42,6 +46,8 @@ class RS485Class : public Stream {
 
     virtual void begin(unsigned long baudrate);
     virtual void begin(unsigned long baudrate, uint16_t config);
+    virtual void begin(unsigned long baudrate, int predelay, int postdelay);
+    virtual void begin(unsigned long baudrate, uint16_t config, int predelay, int postdelay);
     virtual void end();
     virtual int available();
     virtual int peek();
@@ -66,6 +72,8 @@ class RS485Class : public Stream {
     int _txPin;
     int _dePin;
     int _rePin;
+    int _predelay;
+    int _postdelay;
 
     bool _transmisionBegun;
     unsigned long _baudrate;
