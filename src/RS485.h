@@ -36,12 +36,18 @@
 #define RS485_DEFAULT_RE_PIN A5
 #endif
 
+
+#define RS485_DEFAULT_PRE_DELAY 50
+#define RS485_DEFAULT_POST_DELAY 50
+
 class RS485Class : public Stream {
   public:
     RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
 
     virtual void begin(unsigned long baudrate);
     virtual void begin(unsigned long baudrate, uint16_t config);
+    virtual void begin(unsigned long baudrate, int predelay, int postdelay);
+    virtual void begin(unsigned long baudrate, uint16_t config, int predelay, int postdelay);
     virtual void end();
     virtual int available();
     virtual int peek();
@@ -66,6 +72,8 @@ class RS485Class : public Stream {
     int _txPin;
     int _dePin;
     int _rePin;
+    int _predelay = 0;
+    int _postdelay = 0;
 
     bool _transmisionBegun;
     unsigned long _baudrate;
