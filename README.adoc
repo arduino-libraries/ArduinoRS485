@@ -1,13 +1,16 @@
-= RS485 Library for Arduino =
+:repository-owner: arduino-libraries
+:repository-name: ArduinoRS485
 
-image:https://github.com/arduino-libraries/ArduinoRS485/workflows/Compile%20Examples/badge.svg["Compile Examples Status", link="https://github.com/arduino-libraries/ArduinoRS485/actions?workflow=Compile+Examples"] image:https://github.com/arduino-libraries/ArduinoRS485/workflows/Spell%20Check/badge.svg["Spell Check Status", link="https://github.com/arduino-libraries/ArduinoRS485/actions?workflow=Spell+Check"]
+= {repository-name} Library for Arduino =
+
+image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/compile-examples.yml/badge.svg["Compile Examples status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/compile-examples.yml"]
 
 Enables sending and receiving data using the RS485 standard with RS485 shields, like the MKR 485 Shield.
 
 This library supports the Maxim Integrated MAX3157 and equivalent chipsets.
 
 For more information about this library please visit us at
-http://www.arduino.cc/en/Reference/ArduinoRS485
+http://www.arduino.cc/en/Reference/{repository-name}
 
 == License ==
 

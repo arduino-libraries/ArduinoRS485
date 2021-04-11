@@ -1,20 +1,79 @@
 name: Compile Examples
-on: [push, pull_request]
+
+# See: https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows
+on:
+  push:
+    paths:
+      - ".github/workflows/compile-examples.yml"
+      - "examples/**"
+      - "src/**"
+  pull_request:
+    paths:
+      - ".github/workflows/compile-examples.yml"
+      - "examples/**"
+      - "src/**"
+  schedule:
+    # Run every Tuesday at 8 AM UTC to catch breakage caused by changes to external resources (libraries, platforms).
+    - cron: "0 8 * * TUE"
+  workflow_dispatch:
+  repository_dispatch:
+
 jobs:
- build:
-   runs-on: ubuntu-latest
+  build:
+    name: ${{ matrix.board.fqbn }}
+    runs-on: ubuntu-latest
 
-   strategy:
-     matrix:
-       fqbn: [
-         "arduino:avr:uno",
-         "arduino:samd:mkrzero"
-       ]
+    strategy:
+      fail-fast: false
 
-   steps:
-     - uses: actions/checkout@v1
-       with:
-         fetch-depth: 1
-     - uses: arduino/actions/libraries/compile-examples@master
-       with:
-         fqbn: ${{ matrix.fqbn }}
+      matrix:
+        board:
+          - fqbn: arduino:samd:mkrzero
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkr1000
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkrwifi1010
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkrfox1200
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkrwan1300
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkrwan1310
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkrgsm1400
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkrnb1500
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:samd:mkrvidor4000
+            platforms: |
+              - name: arduino:samd
+          - fqbn: arduino:mbed_portenta:envie_m7
+            platforms: |
+              - name: arduino:mbed_portenta
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Compile examples
+        uses: arduino/compile-sketches@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          fqbn: ${{ matrix.board.fqbn }}
+          platforms: ${{ matrix.board.platforms }}
+          libraries: |
+            # Install the library from the local path.
+            - source-path: ./
+            # Additional library dependencies can be listed here.
+            # See: https://github.com/arduino/compile-sketches#libraries
+          sketch-paths: |
+            - examples
+
