@@ -1,14 +1,14 @@
 /*
-  RS485 Sender
+  RS-485 Sender
 
-  This sketch periodically sends a string over the RS485 interface
+  This sketch periodically sends a string over the RS-485 interface
 
   Circuit:
    - MKR board
    - MKR 485 shield
-     - ISO GND connected to GND of the 485 device
-     - Y connected to A of the 485 device
-     - Z connected to B of the 485 device
+     - ISO GND connected to GND of the RS-485 device
+     - Y connected to A of the RS-485 device
+     - Z connected to B of the RS-485 device
      - Jumper positions
        - FULL set to ON
        - Z \/\/ Y set to ON
@@ -35,4 +35,3 @@ void loop() {
 
   delay(1000);
 }
-

@@ -1,28 +1,15 @@
-= RS485 Library for Arduino =
+:repository-owner: arduino-libraries
+:repository-name: ArduinoRS485
 
-image:https://github.com/arduino-libraries/ArduinoRS485/workflows/Compile%20Examples/badge.svg["Compile Examples Status", link="https://github.com/arduino-libraries/ArduinoRS485/actions?workflow=Compile+Examples"] image:https://github.com/arduino-libraries/ArduinoRS485/workflows/Spell%20Check/badge.svg["Spell Check Status", link="https://github.com/arduino-libraries/ArduinoRS485/actions?workflow=Spell+Check"]
+= {repository-name} Library for Arduino =
 
-Enables sending and receiving data using the RS485 standard with RS485 shields, like the MKR 485 Shield.
+image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/check-arduino.yml/badge.svg["Check Arduino status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/check-arduino.yml"]
+image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/compile-examples.yml/badge.svg["Compile Examples status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/compile-examples.yml"]
+image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml/badge.svg["Spell Check status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml"]
+
+Enables sending and receiving data using the RS-485 standard with RS-485 shields, like the MKR 485 Shield.
 
 This library supports the Maxim Integrated MAX3157 and equivalent chipsets.
 
 For more information about this library please visit us at
-http://www.arduino.cc/en/Reference/ArduinoRS485
-
-== License ==
-
-Copyright (c) 2018 Arduino SA. All rights reserved.
-
-This library is free software; you can redistribute it and/or
-modify it under the terms of the GNU Lesser General Public
-License as published by the Free Software Foundation; either
-version 2.1 of the License, or (at your option) any later version.
-
-This library is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public
-License along with this library; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+http://www.arduino.cc/en/Reference/{repository-name}

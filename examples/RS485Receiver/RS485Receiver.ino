@@ -1,14 +1,14 @@
 /*
-  RS485 Receiver
+  RS-485 Receiver
 
-  This sketch receives data over RS485 interface and outputs the data to the Serial interface
+  This sketch receives data over RS-485 interface and outputs the data to the Serial interface
 
   Circuit:
    - MKR board
    - MKR 485 shield
-     - ISO GND connected to GND of the 485 device
-     - A connected to A/Y of the 485 device
-     - B connected to B/Z of the 485 device
+     - ISO GND connected to GND of the RS-485 device
+     - A connected to A/Y of the RS-485 device
+     - B connected to B/Z of the RS-485 device
      - Jumper positions
        - FULL set to ON
        - A \/\/ B set to OFF

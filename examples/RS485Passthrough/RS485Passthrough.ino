@@ -1,20 +1,20 @@
 /*
-  RS485 Passthrough
+  RS-485 Passthrough
 
-  This sketch relays data sent and received between the Serial port and the RS485 interface
+  This sketch relays data sent and received between the Serial port and the RS-485 interface
 
   Circuit:
    - MKR board
-   - MKR 485 shield
-     - ISO GND connected to GND of the 485 device
-     - Y connected to A of the 485 device
-     - Z connected to B of the 485 device
-     - A connected to Y of the 485 device
-     - B connected to Z of the 485 device
+   - MKR 485 Shield
+     - ISO GND connected to GND of the RS-485 device
+     - Y connected to A of the RS-485 device
+     - Z connected to B of the RS-485 device
+     - A connected to Y of the RS-485 device
+     - B connected to Z of the RS-485 device
      - Jumper positions
        - FULL set to ON
-       - Z \/\/ Y set to ON, if the 485 device doesn't provide termination
-       - B \/\/ A set to ON, if the 485 device doesn't provide termination
+       - Z \/\/ Y set to ON, if the RS-485 device doesn't provide termination
+       - B \/\/ A set to ON, if the RS-485 device doesn't provide termination
 
   created 4 July 2018
   by Sandeep Mistry
@@ -42,4 +42,3 @@ void loop() {
     Serial.write(RS485.read());
   }
 }
-
