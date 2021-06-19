@@ -29,11 +29,14 @@
 #endif
 
 #ifdef __AVR__
-#define RS485_DEFAULT_DE_PIN 2
-#define RS485_DEFAULT_RE_PIN -1
+#define RS845_DEFAULT_DE_PIN 2
+#define RS845_DEFAULT_RE_PIN -1
+#elif __SAMD21G18A__
+#define RS845_DEFAULT_DE_PIN A0
+#define RS845_DEFAULT_RE_PIN -1
 #else
-#define RS485_DEFAULT_DE_PIN A6
-#define RS485_DEFAULT_RE_PIN A5
+#define RS845_DEFAULT_DE_PIN A6
+#define RS845_DEFAULT_RE_PIN A5
 #endif
 
 

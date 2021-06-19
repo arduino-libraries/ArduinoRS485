@@ -178,4 +178,11 @@ void RS485Class::setPins(int txPin, int dePin, int rePin)
   _rePin = rePin;
 }
 
+#ifndef RS485_DEFAULT_DE_PIN
+#define RS485_DEFAULT_DE_PIN -1
+#endif
+#ifndef RS485_DEFAULT_RE_PIN
+#define RS485_DEFAULT_RE_PIN -1
+#endif
+
 RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
