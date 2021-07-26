@@ -47,8 +47,10 @@ void RS485Class::begin(unsigned long baudrate, uint16_t config, int predelay, in
 {
   _baudrate = baudrate;
   _config = config;
-  _predelay = predelay;
-  _postdelay = postdelay;
+
+  // Set only if not already initialized with ::setDelays
+  _predelay = _predelay == 0 ? predelay : _predelay;
+  _postdelay = _postdelay == 0 ? postdelay : _postdelay;
 
   if (_dePin > -1) {
     pinMode(_dePin, OUTPUT);
@@ -176,6 +178,12 @@ void RS485Class::setPins(int txPin, int dePin, int rePin)
   _txPin = txPin;
   _dePin = dePin;
   _rePin = rePin;
+}
+
+void RS485Class::setDelays(int predelay, int postdelay)
+{
+  _predelay = predelay;
+  _postdelay = postdelay;
 }
 
 RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
