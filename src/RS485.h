@@ -67,6 +67,8 @@ class RS485Class : public Stream {
 
     void setPins(int txPin, int dePin, int rePin);
 
+    void setDelays(int predelay, int postdelay);
+
   private:
     HardwareSerial* _serial;
     int _txPin;
