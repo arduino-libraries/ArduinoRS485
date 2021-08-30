@@ -90,7 +90,7 @@ class RS485Class : public Stream {
 
     bool _transmisionBegun;
     unsigned long _baudrate;
-    uint16_t _config;
+    RS485_SER_CONF_TYPE _config;
 };
 
 extern RS485Class RS485;
