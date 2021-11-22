@@ -137,6 +137,11 @@ void RS485Class::endTransmission()
   }
 
   _transmisionBegun = false;
+#ifdef ESP32
+  // there is a bug in ESP32 for Serial2
+  while(_serial->available())
+    _serial->read();
+#endif
 }
 
 void RS485Class::receive()
