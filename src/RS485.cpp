@@ -186,4 +186,9 @@ void RS485Class::setDelays(int predelay, int postdelay)
   _postdelay = postdelay;
 }
 
+void RS485Class::setSerial(HardwareSerial* serial)
+{
+  _serial = serial;
+}
+
 RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
