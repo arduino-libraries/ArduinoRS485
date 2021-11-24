@@ -581,3 +581,21 @@ None.
 * [noReceive()](#noreceive)
 * [sendBreak()](#sendbreak)
 * [sendBreakMicroseconds()](#sendbreakmicroseconds)
+
+### `setSerial()`
+
+Modify the hardware serial used to communicate with the MAX3157 chipset. Must use with RS485.setPins() to update new txPin.
+
+#### Syntax 
+
+```
+RS485.setSerial(HardwareSerial* serial)
+```
+
+#### Parameters
+
+* _serial: hardware serial port to use.
+
+#### Returns
+
+None.
