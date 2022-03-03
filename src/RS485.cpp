@@ -38,12 +38,12 @@ void RS485Class::begin(unsigned long baudrate, int predelay, int postdelay)
   begin(baudrate, SERIAL_8N1, predelay, postdelay);
 }
 
-void RS485Class::begin(unsigned long baudrate, uint16_t config)
+void RS485Class::begin(unsigned long baudrate, RS485_SER_CONF_TYPE config)
 {
   begin(baudrate, config, RS485_DEFAULT_PRE_DELAY, RS485_DEFAULT_POST_DELAY);
 }
 
-void RS485Class::begin(unsigned long baudrate, uint16_t config, int predelay, int postdelay)
+void RS485Class::begin(unsigned long baudrate, RS485_SER_CONF_TYPE config, int predelay, int postdelay)
 {
   _baudrate = baudrate;
   _config = config;
@@ -137,6 +137,11 @@ void RS485Class::endTransmission()
   }
 
   _transmisionBegun = false;
+#ifdef ESP32
+  // there is a bug in ESP32 for Serial2
+  while(_serial->available())
+    _serial->read();
+#endif
 }
 
 void RS485Class::receive()

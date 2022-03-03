@@ -8,6 +8,7 @@ image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/
 image:https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml/badge.svg["Spell Check status", link="https://github.com/{repository-owner}/{repository-name}/actions/workflows/spell-check.yml"]
 
 Enables sending and receiving data using the RS-485 standard with RS-485 shields, like the MKR 485 Shield.
+I've Made this compatible with ESP8266 and ESP32.
 
 This library supports the Maxim Integrated MAX3157 and equivalent chipsets.
 
