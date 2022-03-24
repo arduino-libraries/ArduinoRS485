@@ -28,9 +28,12 @@
 #define RS485_DEFAULT_TX_PIN 1 
 #endif
 
-#ifdef __AVR__
+#if defined(__AVR__)
 #define RS485_DEFAULT_DE_PIN 2
 #define RS485_DEFAULT_RE_PIN -1
+#elif defined(ARDUINO_NANO_RP2040_CONNECT)
+#define RS485_DEFAULT_DE_PIN A2
+#define RS485_DEFAULT_RE_PIN A1
 #else
 #define RS485_DEFAULT_DE_PIN A6
 #define RS485_DEFAULT_RE_PIN A5
