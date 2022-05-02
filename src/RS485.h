@@ -22,10 +22,12 @@
 
 #include <Arduino.h>
 
+#ifndef RS485_DEFAULT_TX_PIN
 #ifdef PIN_SERIAL1_TX
 #define RS485_DEFAULT_TX_PIN PIN_SERIAL1_TX
 #else
 #define RS485_DEFAULT_TX_PIN 1 
+#endif
 #endif
 
 #ifdef __AVR__
@@ -35,8 +37,10 @@
 #define RS485_DEFAULT_DE_PIN A1
 #define RS485_DEFAULT_RE_PIN A0
 #else
+#ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
 #define RS485_DEFAULT_RE_PIN A5
+#endif
 #endif
 
 
