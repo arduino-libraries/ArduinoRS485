@@ -19,6 +19,18 @@
 
 #include "RS485.h"
 
+#ifdef __MBED__
+#include "pinDefinitions.h"
+RS485Class::RS485Class(HardwareSerial& hwSerial, PinName txPin, PinName dePin, PinName rePin) :
+  _serial(&hwSerial),
+  _txPin(PinNameToIndex(txPin)),
+  _dePin(PinNameToIndex(dePin)),
+  _rePin(PinNameToIndex(rePin)),
+  _transmisionBegun(false)
+{
+}
+#endif
+
 RS485Class::RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin) :
   _serial(&hwSerial),
   _txPin(txPin),
@@ -186,8 +198,8 @@ void RS485Class::setDelays(int predelay, int postdelay)
   _postdelay = postdelay;
 }
 
-#ifdef RS285_SERIAL_PORT
-RS485Class RS485(RS285_SERIAL_PORT, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
+#ifdef RS485_SERIAL_PORT
+RS485Class RS485(RS485_SERIAL_PORT, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
 #else
 RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
 #endif

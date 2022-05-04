@@ -49,6 +49,9 @@
 
 class RS485Class : public Stream {
   public:
+#ifdef __MBED__
+    RS485Class(HardwareSerial& hwSerial, PinName txPin, PinName dePin, PinName rePin);
+#endif
     RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
 
     virtual void begin(unsigned long baudrate);
