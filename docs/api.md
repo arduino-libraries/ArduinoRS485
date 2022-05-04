@@ -104,40 +104,6 @@ The number of bytes available to read.
 * [sendBreakMicroseconds()](#sendbreakmicroseconds)
 * [setPins()](#setpins)
 
-### `available()`
-
-Get the number of bytes (characters) available for reading from the RS485 port. This is data that already arrived and is stored in the serial receive buffer.
-
-#### Syntax 
-
-```
-RS485.available()
-```
-
-#### Parameters
-
-None. 
-
-#### Returns
-
-The number of bytes available to read.
-
-#### See also
-
-* [begin()](#begin)
-* [end()](#end)
-* [peek()](#peek)
-* [read()](#read)
-* [write()](#write)
-* [flush()](#flush)
-* [beginTransmission()](#begintransmission)
-* [endTransmission()](#endtransmission)
-* [receive()](#receive)
-* [noReceive()](#noreceive)
-* [sendBreak()](#sendbreak)
-* [sendBreakMicroseconds()](#sendbreakmicroseconds)
-* [setPins()](#setpins)
-
 ### `peek()`
 
 Returns the next byte (character) of the incoming serial data without removing it from the internal serial buffer. That is, successive calls to peek() will return the same character, as will the next call to read().
