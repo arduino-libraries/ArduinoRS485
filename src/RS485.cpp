@@ -83,13 +83,13 @@ void RS485Class::end()
 {
   _serial->end();
 
-  if (_rePin > -1) {
-    digitalWrite(_rePin, LOW);
+  if (_dePin > -1) {
+    digitalWrite(_dePin, LOW);
     pinMode(_dePin, INPUT);
   }
   
-  if (_dePin > -1) {
-    digitalWrite(_dePin, LOW);
+  if (_rePin > -1) {
+    digitalWrite(_rePin, LOW);
     pinMode(_rePin, INPUT);
   }
 }
