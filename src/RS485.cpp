@@ -76,7 +76,12 @@ void RS485Class::begin(unsigned long baudrate, uint16_t config, int predelay, in
 
   _transmisionBegun = false;
 
+#if defined(ARDUINO_OPTA)
+  auto _opta_uart = static_cast<UART *>(_serial);
+  _opta_uart->begin(baudrate, config, true);
+#else
   _serial->begin(baudrate, config);
+#endif 
 }
 
 void RS485Class::end()
