@@ -30,6 +30,10 @@
 #endif
 #endif
 
+#ifndef RS485_SERIAL_PORT
+#define RS485_SERIAL_PORT Serial
+#endif
+
 #ifdef __AVR__
 #define RS485_DEFAULT_DE_PIN 2
 #define RS485_DEFAULT_RE_PIN -1
