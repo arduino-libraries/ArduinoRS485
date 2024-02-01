@@ -30,6 +30,7 @@
 #endif
 #endif
 
+#ifndef RS485_DEFAULT_DE_PIN
 #ifdef __AVR__
 #define RS485_DEFAULT_DE_PIN 2
 #define RS485_DEFAULT_RE_PIN -1
@@ -40,7 +41,6 @@
 #define RS485_DEFAULT_DE_PIN A4
 #define RS485_DEFAULT_RE_PIN A5
 #else
-#ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
 #define RS485_DEFAULT_RE_PIN A5
 #endif
