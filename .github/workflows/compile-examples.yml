@@ -34,36 +34,47 @@ jobs:
           - fqbn: arduino:samd:mkrzero
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrzero
           - fqbn: arduino:samd:mkr1000
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkr1000
           - fqbn: arduino:samd:mkrwifi1010
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrwifi1010
           - fqbn: arduino:samd:mkrfox1200
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrfox1200
           - fqbn: arduino:samd:mkrwan1300
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrwan1300
           - fqbn: arduino:samd:mkrwan1310
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrwan1310
           - fqbn: arduino:samd:mkrgsm1400
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrgsm1400
           - fqbn: arduino:samd:mkrnb1500
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrnb1500
           - fqbn: arduino:samd:mkrvidor4000
             platforms: |
               - name: arduino:samd
+            artifact-name-suffix: arduino-samd-mkrvidor4000
           - fqbn: arduino:mbed_portenta:envie_m7
             platforms: |
               - name: arduino:mbed_portenta
+            artifact-name-suffix: arduino-mbed_portenta-envie_m7
           - fqbn: arduino:mbed_opta:opta
             platforms: |
               - name: arduino:mbed_opta
+            artifact-name-suffix: arduino-suffix-opta
 
     steps:
       - name: Checkout repository
@@ -86,8 +97,8 @@ jobs:
           sketches-report-path: ${{ env.SKETCHES_REPORTS_PATH }}
 
       - name: Save sketches report as workflow artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           if-no-files-found: error
           path: ${{ env.SKETCHES_REPORTS_PATH }}
-          name: ${{ env.SKETCHES_REPORTS_PATH }}
+          name: sketches-report-${{ matrix.board.artifact-name-suffix }}
