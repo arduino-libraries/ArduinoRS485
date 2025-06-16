@@ -22,6 +22,18 @@
 
 #include <Arduino.h>
 
+#ifdef ARDUINO_SAM_DUE
+#define SERIAL_HARDWARE_CLASS USARTClass
+#define SERIAL_MODE_TYPE UARTClass::UARTModes
+#else
+#define SERIAL_HARDWARE_CLASS HardwareSerial
+#define SERIAL_MODE_TYPE uint16_t
+#endif
+
+#ifdef ARDUINO_ARCH_SAM
+#define PIN_SERIAL1_TX 18
+#endif
+
 #ifndef RS485_DEFAULT_TX_PIN
 #ifdef PIN_SERIAL1_TX
 #define RS485_DEFAULT_TX_PIN PIN_SERIAL1_TX
@@ -39,10 +51,15 @@
 #elif ARDUINO_SAMD_ZERO
 #define RS485_DEFAULT_DE_PIN A4
 #define RS485_DEFAULT_RE_PIN A5
+//#elif defined(ARDUINO_UNOR4_WIFI) || defined(ARDUINO_UNOR4_MINIMA)
 #elif defined(ARDUINO_UNOR4_WIFI) || defined(ARDUINO_UNOR4_MINIMA)
-#define SERIAL_PORT_HARDWARE Serial1
+#define SERIAL_PORT_HARDWARE_DEFAULT Serial1
 #define RS485_DEFAULT_DE_PIN 8
 #define RS485_DEFAULT_RE_PIN 7
+#elif  defined(ARDUINO_ARCH_SAM)
+#define SERIAL_PORT_HARDWARE_DEFAULT Serial1
+#define RS485_DEFAULT_DE_PIN 23
+#define RS485_DEFAULT_RE_PIN -1
 #else
 #ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
@@ -64,14 +81,14 @@
 class RS485Class : public Stream {
   public:
 #ifdef __MBED__
-    RS485Class(HardwareSerial& hwSerial, PinName txPin, PinName dePin, PinName rePin);
+    RS485Class(SERIAL_HARDWARE_LIB& hwSerial, PinName txPin, PinName dePin, PinName rePin);
 #endif
-    RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
+    RS485Class(SERIAL_HARDWARE_CLASS& hwSerial, int txPin, int dePin, int rePin);
 
     virtual void begin(unsigned long baudrate);
-    virtual void begin(unsigned long baudrate, uint16_t config);
     virtual void begin(unsigned long baudrate, int predelay, int postdelay);
-    virtual void begin(unsigned long baudrate, uint16_t config, int predelay, int postdelay);
+    virtual void begin(unsigned long baudrate, SERIAL_MODE_TYPE config);
+    virtual void begin(unsigned long baudrate, SERIAL_MODE_TYPE config, int predelay, int postdelay);
     virtual void end();
     virtual int available();
     virtual int peek();
@@ -94,7 +111,7 @@ class RS485Class : public Stream {
     void setDelays(int predelay, int postdelay);
 
   private:
-    HardwareSerial* _serial;
+    SERIAL_HARDWARE_CLASS* _serial;
     int _txPin;
     int _dePin;
     int _rePin;
@@ -103,7 +120,7 @@ class RS485Class : public Stream {
 
     bool _transmisionBegun;
     unsigned long _baudrate;
-    uint16_t _config;
+    SERIAL_MODE_TYPE _config;
 };
 
 extern RS485Class RS485;
