@@ -84,7 +84,7 @@
 class RS485Class : public Stream {
   public:
 #ifdef __MBED__
-    RS485Class(SERIAL_HARDWARE_LIB& hwSerial, PinName txPin, PinName dePin, PinName rePin);
+    RS485Class(SERIAL_HARDWARE_CLASS& hwSerial, PinName txPin, PinName dePin, PinName rePin);
 #endif
     RS485Class(SERIAL_HARDWARE_CLASS& hwSerial, int txPin, int dePin, int rePin);
 
