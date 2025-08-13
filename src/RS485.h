@@ -43,6 +43,10 @@
 #define SERIAL_PORT_HARDWARE Serial1
 #define RS485_DEFAULT_DE_PIN 8
 #define RS485_DEFAULT_RE_PIN 7
+#elif defined(ESP32) || defined(ESP8266)
+#define RS485_DEFAULT_DE_PIN 12
+#define RS485_DEFAULT_RE_PIN 13
+
 #else
 #ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
@@ -61,6 +65,12 @@
 #define RS485_DEFAULT_PRE_DELAY 50
 #define RS485_DEFAULT_POST_DELAY 50
 
+#if defined(ESP32) || defined(ESP8266)
+#define RS485_SER_CONF_TYPE SerialConfig
+#else
+#define RS485_SER_CONF_TYPE uint16_t
+#endif
+
 class RS485Class : public Stream {
   public:
 #ifdef __MBED__
@@ -69,9 +79,9 @@ class RS485Class : public Stream {
     RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
 
     virtual void begin(unsigned long baudrate);
-    virtual void begin(unsigned long baudrate, uint16_t config);
+    virtual void begin(unsigned long baudrate, RS485_SER_CONF_TYPE config);
     virtual void begin(unsigned long baudrate, int predelay, int postdelay);
-    virtual void begin(unsigned long baudrate, uint16_t config, int predelay, int postdelay);
+    virtual void begin(unsigned long baudrate, RS485_SER_CONF_TYPE config, int predelay, int postdelay);
     virtual void end();
     virtual int available();
     virtual int peek();
@@ -103,7 +113,7 @@ class RS485Class : public Stream {
 
     bool _transmisionBegun;
     unsigned long _baudrate;
-    uint16_t _config;
+    RS485_SER_CONF_TYPE _config;
 };
 
 extern RS485Class RS485;
