@@ -43,6 +43,11 @@
 #define SERIAL_PORT_HARDWARE Serial1
 #define RS485_DEFAULT_DE_PIN 8
 #define RS485_DEFAULT_RE_PIN 7
+#elif defined(ARDUINO_UNO_Q)
+// Support for Uno Q with the SPE Shield mounted
+#define SERIAL_PORT_HARDWARE Serial
+#define RS485_DEFAULT_DE_PIN D8
+#define RS485_DEFAULT_RE_PIN D7
 #else
 #ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
