@@ -1,4 +1,7 @@
 #include "RS485FileHandle.h"
+
+#ifdef ARDUINO_ARCH_MBED
+
 #include <ArduinoRS485.h>
 #include <errno.h>
 
@@ -76,3 +79,5 @@ int RS485FileHandle::isatty() const {
 
 // Global instance for stdout redirection
 RS485FileHandle RS485Console;
+
+#endif  // ARDUINO_ARCH_MBED

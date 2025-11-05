@@ -6,9 +6,10 @@
  * Initial author: Sebastian Romero @sebromero
  */
 
+#ifdef ARDUINO_ARCH_MBED
 #include "RS485FileHandle.h"
-
 REDIRECT_STDOUT_TO(&RS485Console) // Redirect mbed crash log output to RS485
+#endif
 
 void setup() {
   // Force a crash to demonstrate the crash log over RS485

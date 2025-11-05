@@ -1,6 +1,8 @@
 #ifndef RS485_FILE_HANDLE_H
 #define RS485_FILE_HANDLE_H
 
+#ifdef ARDUINO_ARCH_MBED
+
 #include "mbed.h"
 
 /**
@@ -83,5 +85,7 @@ private:
  * @brief Global RS485 FileHandle instance used to redirect stdio.
  */
 extern RS485FileHandle RS485Console;
+
+#endif  // ARDUINO_ARCH_MBED
 
 #endif  // RS485_FILE_HANDLE_H
