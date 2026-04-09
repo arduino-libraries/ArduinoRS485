@@ -52,6 +52,13 @@
 #endif
 #define RS485_DEFAULT_DE_PIN D8
 #define RS485_DEFAULT_RE_PIN D7
+#elif defined(ARDUINO_ARCH_ZEPHYR)
+// Support for Zephyr boards with default Serial1 and no pin remapping
+#define SERIAL_PORT_HARDWARE Serial1
+#ifndef RS485_DEFAULT_DE_PIN
+#define RS485_DEFAULT_DE_PIN -1
+#define RS485_DEFAULT_RE_PIN -1
+#endif
 #else
 #ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
