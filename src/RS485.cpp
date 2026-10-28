@@ -64,6 +64,12 @@ void RS485Class::begin(unsigned long baudrate, uint16_t config, int predelay, in
   _predelay = _predelay == 0 ? predelay : _predelay;
   _postdelay = _postdelay == 0 ? postdelay : _postdelay;
 
+#if defined(ARDUINO_ARCH_ZEPHYR)
+  // Serial.begin() reapplies devicetree pinctrl, which may include DE/RE.
+  // Configure the direction pins as GPIOs after the UART has started.
+  _serial->begin(baudrate, config);
+#endif
+
   if (_dePin > -1) {
     pinMode(_dePin, OUTPUT);
     digitalWrite(_dePin, LOW);
@@ -79,7 +85,7 @@ void RS485Class::begin(unsigned long baudrate, uint16_t config, int predelay, in
 #if defined(ARDUINO_OPTA) && defined(__MBED__)
   auto _opta_uart = static_cast<UART *>(_serial);
   _opta_uart->begin(baudrate, config, true);
-#else
+#elif !defined(ARDUINO_ARCH_ZEPHYR)
   _serial->begin(baudrate, config);
 #endif 
 }
