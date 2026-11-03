@@ -52,6 +52,13 @@
 #endif
 #define RS485_DEFAULT_DE_PIN D8
 #define RS485_DEFAULT_RE_PIN D7
+#elif defined(ARDUINO_ARCH_ZEPHYR)
+// Support for Zephyr boards with default Serial1 and no pin remapping
+#define SERIAL_PORT_HARDWARE Serial1
+#ifndef RS485_DEFAULT_DE_PIN
+#define RS485_DEFAULT_DE_PIN -1
+#define RS485_DEFAULT_RE_PIN -1
+#endif
 #else
 #ifndef RS485_DEFAULT_DE_PIN
 #define RS485_DEFAULT_DE_PIN A6
@@ -65,6 +72,41 @@
 
 #ifdef CUSTOM_RS485_DEFAULT_RE_PIN
 # define RS485_DEFAULT_RE_PIN CUSTOM_RS485_DEFAULT_RE_PIN
+#endif
+
+#if defined(ARDUINO_ARCH_ZEPHYR) && defined(ARDUINO_CONSOLE_SERIAL)
+#if DT_HAS_CHOSEN(zephyr_console) && DT_NODE_HAS_PROP(DT_PATH(zephyr_user), serials)
+// ARDUINO_CONSOLE_SERIAL is usable only if the console maps to an Arduino
+// serial object. A console on a UART absent from the serials array cannot
+// conflict with the default RS485 port.
+#if !IS_EMPTY(ZARD_SERIAL_INDEXOF(DT_CHOSEN(zephyr_console))) || \
+    DT_SAME_NODE(DT_CHOSEN(zephyr_console), ZARD_SERIALUSB_PHANDLE)
+namespace arduino_rs485_detail {
+template<bool sharedWithConsole> struct ConsoleSerialCheck {
+  static constexpr bool check() { return true; }
+};
+
+template<> struct ConsoleSerialCheck<true> {
+  [[deprecated("ArduinoRS485: the selected serial port is also zephyr,console. "
+               "Console input or output may interfere with RS485 communication, ensure to not enable it on the same serial port.")]]
+  static constexpr bool check() { return true; }
+};
+} // namespace arduino_rs485_detail
+
+// Use the same selection as the global RS485 instance in RS485.cpp.
+// The assertion always succeeds; only the matching specialization warns.
+// This adds no runtime code, even when the console and logging are disabled.
+#ifdef RS485_SERIAL_PORT
+static_assert(arduino_rs485_detail::ConsoleSerialCheck<
+    (static_cast<const HardwareSerial *>(&RS485_SERIAL_PORT) ==
+     static_cast<const HardwareSerial *>(&ARDUINO_CONSOLE_SERIAL))>::check(), "");
+#else
+static_assert(arduino_rs485_detail::ConsoleSerialCheck<
+    (static_cast<const HardwareSerial *>(&SERIAL_PORT_HARDWARE) ==
+     static_cast<const HardwareSerial *>(&ARDUINO_CONSOLE_SERIAL))>::check(), "");
+#endif
+#endif
+#endif
 #endif
 
 #define RS485_DEFAULT_PRE_DELAY 50
